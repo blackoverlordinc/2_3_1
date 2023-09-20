@@ -3,6 +3,9 @@ package web.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -11,9 +14,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")
     private int id;
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false, length = 50) //сюда добавил аннотации для валидации
+    @NotEmpty(message = "Your name should not be empty")
+    @Size(min = 2, max = 50, message = "Your name should be between 2 and 30 characters")
+    @Pattern(regexp = "[A-Za-z]+", message = "your name can only contain lowercase and uppercase letters")
     private String name;
-    @Column(name = "surname", nullable = false, length = 50)
+    @Column(name = "surname", nullable = false, length = 50) //сюда добавил аннотации для валидации
+    @NotEmpty(message = "Your surname should not be empty")
+    @Size(min = 2, max = 50, message = "Your surname should be between 2 and 30 characters")
+    @Pattern(regexp = "[A-Za-z]+", message = "your surname can only contain lowercase and uppercase letters")
     private String surname;
 
     public User(String name, String surname) {

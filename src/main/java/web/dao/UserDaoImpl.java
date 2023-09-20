@@ -1,8 +1,6 @@
 package web.dao;
-
-import org.springframework.stereotype.Component;
+//убрал импорты
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import javax.persistence.EntityManager;
@@ -20,8 +18,7 @@ public class UserDaoImpl implements UserDao{
         return entityManager.createQuery("FROM User", User.class).getResultList();
     }
 
-    @Override
-    @Transactional
+    @Override //убрал transactional
     public void addUser(User user) {
         entityManager.persist(user);
     }
@@ -32,8 +29,8 @@ public class UserDaoImpl implements UserDao{
         return q.getResultList().stream().findAny().orElse(null);
     }
 
-    @Transactional
-    public void update(int id, User updatedUser){
+
+    public void update(int id, User updatedUser){ //убрал transactional
         User userToBeUpdated = show(id);
         userToBeUpdated.setName(updatedUser.getName());
         userToBeUpdated.setSurname(updatedUser.getSurname());
