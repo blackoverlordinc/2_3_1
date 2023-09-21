@@ -15,12 +15,13 @@ public class UserServiceImpl implements UserService{
         this.userDao = userDao;
     }
 
-    @Transactional(readOnly = true)
+
     @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
+    @Transactional
     @Override
     public void addUser(User user) {
          userDao.addUser(user);
